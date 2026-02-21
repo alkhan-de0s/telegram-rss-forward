@@ -1,0 +1,36 @@
+name: Fetch and Post News
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-fetch-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run fetch job
+        run: npm run job:fetch
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TARGET_CHAT_ID: ${{ secrets.TARGET_CHAT_ID }}
+          SOURCE_CHANNEL_USERNAME: ${{ secrets.SOURCE_CHANNEL_USERNAME }}
+          FETCH_LIMIT: ${{ secrets.FETCH_LIMIT }}
+          TRANSLATE_ENABLED: ${{ secrets.TRANSLATE_ENABLED }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          MYMEMORY_EMAIL: ${{ secrets.MYMEMORY_EMAIL }}
+          DELETE_AFTER_HOURS: ${{ secrets.DELETE_AFTER_HOURS }}
+          REQUEST_TIMEOUT_MS: ${{ secrets.REQUEST_TIMEOUT_MS }}
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+

@@ -1,0 +1,22 @@
+{
+  "name": "telegram-rss-forwarder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Fetches public Telegram channel posts from t.me/s, translates, and forwards to a Telegram group with 24h auto-delete.",
+  "scripts": {
+    "start": "node src/jobs/fetchAndPostJob.js",
+    "job:fetch": "node src/jobs/fetchAndPostJob.js",
+    "job:delete": "node src/jobs/deleteExpiredJob.js",
+    "check": "node src/jobs/fetchAndPostJob.js --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "firebase-admin": "^12.7.0"
+  }
+}
+

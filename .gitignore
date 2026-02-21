@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.local
+coverage/
+*.log
+
+# Firebase / service account secrets
+src/services/firebase-service-account.json
+firebase-service-account.json
+serviceAccount.json
+*service-account*.json
+
